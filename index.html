@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
+<head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <!--<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
@@ -13,129 +13,348 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Netduino PID Controller Rancilio Silvia Mod in .NET Micro Framework by pettijohn</title>
-  </head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/redmond/jquery-ui.css" />
 
-  <body>
+    <title>Netduino PID Controller Rancilio Silvia Mod in .NET Micro Framework by pettijohn</title>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".accordion").accordion({ header: "h4", collapsible: true, heightStyle: "content", active: false });
+        });
+    </script>
+</head>
+
+<body>
     <header>
-      <div class="inner">
-        <h1>Netduino PID Controller</h1>
-        <h2>Rancilio Silvia Mod in .NET Micro Framework</h2>
-        <a href="https://github.com/pettijohn/PidController" class="button"><small>View project on</small>GitHub</a>
-      </div>
+        <div class="inner">
+            <h1>Netduino PID Controller</h1>
+            <h2>Rancilio Silvia Mod in .NET Micro Framework</h2>
+            <a href="https://github.com/pettijohn/PidController" class="button"><small>View project on</small>GitHub</a>
+        </div>
     </header>
 
     <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-              Project Status</h3>
+        <div class="inner clearfix">
+            <section id="main-content">
+                <h3>Project Status</h3>
 
-<p>Parts have been ordered. </p>
+                <p>2013/09/11: Parts have been ordered. </p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+                <h3>Parts List</h3>
+                <div class="accordion">
+                    <h4>Summary and Prices</h4>
+                    <div>
+                        <p>
+                            Parts purchased from numerous vendors on eBay shipping predominantly from Honk Kong and China (with the exception of the Netduino itself, which is from Little Bird).
+                            Given the disparate vendors and for posterity, images and specs have been copied here.
+                        </p>
+                        <p>Prices below reflect total cost to my door, including shipping and tax, in AUD in September 2013.</p>
+                        <table>
+                            <tr>
+                                <th>Descr</th>
+                                <th>Qty</th>
+                                <th>Item $</th>
+                                <th>Total $</th>
+                            </tr>
+                            <tr>
+                                <td>Thermocouple</td>
+                                <td>2</td>
+                                <td>6</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Thermocouple Amp</td>
+                                <td>2</td>
+                                <td>13</td>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <td>Sold State Relay 10A 240V</td>
+                                <td>2</td>
+                                <td>4.48</td>
+                                <td>8.96</td>
+                            </tr>
+                            <tr>
+                                <td>IC Socket Adapter 10</td>
+                                <td>1</td>
+                                <td>2.37</td>
+                                <td>2.37</td>
+                            </tr>
+                            <tr>
+                                <td>Display 20x4</td>
+                                <td>2</td>
+                                <td>12.99</td>
+                                <td>25.98</td>
+                            </tr>
+                            <tr>
+                                <td>Real time clock</td>
+                                <td>2</td>
+                                <td>2.21</td>
+                                <td>4.42</td>
+                            </tr>
+                            <tr>
+                                <td>Rotary Encoder 10pc</td>
+                                <td>1</td>
+                                <td>5.43</td>
+                                <td>5.43</td>
+                            </tr>
+                            <tr>
+                                <td>Prototyping Shield</td>
+                                <td>2</td>
+                                <td>4.46</td>
+                                <td>8.92</td>
+                            </tr>
+                            <tr>
+                                <td>Netduino 2</td>
+                                <td>2</td>
+                                <td>46.01</td>
+                                <td>92.02</td>
+                            </tr>
+                            <tr>
+                                <td>Distance Sensor</td>
+                                <td>1</td>
+                                <td>1.82</td>
+                                <td>1.82</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td>187.92</td>
+                            </tr>
+                        </table>
+                    </div>
 
-<h3>
-    Parts List</h3>
-
-            <p><i>Prices in AUD</i></p>
-<p>
-    <table>
-        <tr>
-            <th>Descr</th>
-            <th>Qty</th>
-            <th>Item $</th>
-            <th>Total $</th>
-        </tr>
-        <tr >
-            <td >Thermocouple</td>
-            <td>2</td>
-            <td>6</td>
-            <td>12</td>
-        </tr>
-        <tr >
-            <td >SSR 10A</td>
-            <td>2</td>
-            <td>4.48</td>
-            <td>8.96</td>
-        </tr>
-        <tr >
-            <td>Thermocouple Amp</td>
-            <td>2</td>
-            <td>13</td>
-            <td>26</td>
-        </tr>
-        <tr>
-            <td>IC Socket Adapter 10</td>
-            <td>1</td>
-            <td>2.37</td>
-            <td>2.37</td>
-        </tr>
-        <tr >
-            <td>Display 20x4</td>
-            <td>2</td>
-            <td>12.99</td>
-            <td>25.98</td>
-        </tr>
-        <tr>
-            <td>Real time clock</td>
-            <td>2</td>
-            <td>2.21</td>
-            <td>4.42</td>
-        </tr>
-        <tr>
-            <td >Rotary Encoder 10pc</td>
-            <td>1</td>
-            <td>5.43</td>
-            <td>5.43</td>
-        </tr>
-        <tr>
-            <td>Prototyping Shield</td>
-            <td>2</td>
-            <td>4.46</td>
-            <td>8.92</td>
-        </tr>
-        <tr>
-            <td>Netduino 2</td>
-            <td>2</td>
-            <td>46.01</td>
-            <td>92.02</td>
-        </tr>
-        <tr>
-            <td>Distance Sensor</td>
-            <td>1</td>
-            <td>1.82</td>
-            <td>1.82</td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td></td>
-            <td></td>
-            <td>187.92</td>
-        </tr>
-    </table>
-            </p>
+                    <h4>K-Type Themocouple</h4>
+                    <div>
+                        <img src="parts/thermocouple.jpg" />
+                        <img src="parts/thermocouple2.jpg" />
+                        <img src="parts/thermocouple3.jpg" />
+                        <ul>
+                            <li>Operating Temperature: -40 - 400 C </li>
+                            <li>Washer Material: Iron </li>
+                            <li>Inner Diameter: 12mm </li>
+                            <li>Outer Diameter: 19mm </li>
+                            <li>Cable Length: 2m </li>
+                            <li>Cable External Shielding: Stainless Steel Braiding </li>
+                            <li>Cable Internal Insulation: Fiberglass</li>
+                        </ul>
+                    </div>
+                    <h4>AD595AQ Thermocouple Amplifier</h4>
+                    <div>
+                        <img src="parts/thermocoupleamp.jpg" />
+                        <p><a href="parts/thermocoupleamp.pdf">Chip datasheet</a> [pdf]</p>
+                    </div>
+                    <h4>Solid State Relay - 24 to 380VAC @ 10A</h4>
+                    <div>
+                        <img src="parts/ssr.jpg" />
+                        <img src="parts/ssr2.jpg" />
+                        <ul>
+                            <li>Weight: 132g</li>
+                            <li>Size:5.9 x 4.5 x 2.3cm</li>
+                            <li>Color : Grey</li>
+                            <li>Long service life and high reliability</li>
+                            <li>Highly reliable, compact size designed to offer users maximum simplicity</li>
+                            <li>Fast switching</li>
+                            <li>Reduced electromagnetic interference</li>
+                            <li>Output voltage: AC 24-380V</li>
+                            <li>Output current: 10A</li>
+                            <li>Input voltage: DC 3-32V</li>
+                            <li>Control Method: DC to AC</li>
+                            <li>Mounting Method: Bolts fixed</li>
+                            <li>3-25mA control current DC</li>
+                            <li>-State leakage current ≤ 2mA</li>
+                            <li>On-state buck ≤ 1.5VAC</li>
+                            <li>Off-state time ≤ 10mS</li>
+                            <li>Dielectric strength 2500VAC</li>
+                            <li>Insulation resistance 500Mω/500VDC</li>
+                            <li>Ambient temperature -30 ℃ - +75 ℃</li>
+                            <li>Work indicator LED</li>
+                        </ul>
+                    </div>
+                    <h4>DIP14 IC Socket Adapter Adaptor (10 pack)</h4>
+                    <div>
+                        <img src="parts/chipsocket.jpg" />
+                        <ul>
+                            <li>SKU: 14_S000214005160</li>
+                            <li>10pcs 14pin IC socket. </li>
+                            <li>Pitch of these IC sockets are 2.54mm. </li>
+                            <li>These IC sockets measure approx. 18mm long, 10mm wide and 9mm high.</li>
+                            <li>Description:</li>
+                            <li>Number of Pins: 14</li>
+                            <li>Pitch: 2.54 mm</li>
+                            <li>Overall Size: Approx. 18 x 10 x 9 mm</li>
+                        </ul>
+                    </div>
+                    <h4>20x4 Character LCD Serial Display with Blue Backlight</h4>
+                    <div>
+                        <img src="parts/display.jpg" />
+                        <img src="parts/display2.jpg" />
+                        <ul>
+                            <li>Brand new and high quality.</li>
+                            <li>Arduino dedicated IIC bus control, it only takes two IO.</li>
+                            <li>And adjustable contrast and backlight controlled.</li>
+                            <li>Using high-quality LCD screen 2004, blue and white, clear display.</li>
+                            <li>IIC bus control, it only takes two IO port.</li>
+                            <li>Controllable backlight can be controlled by jumper, you can also program control.</li>
+                            <li>Screen display and adjustable contrast.</li>
+                            <li>5V power supply, the device address 0x27.</li>
+                            <li>Apply to the arduino platform.</li>
+                            <li>Size:9.8cm x 6cm - 3.9inch x 2.4inch.</li>
+                        </ul>
 
 
-        </section>
+                    </div>
+                    <h4>Rotary Encoder (10 pack)</h4>
+                    <div>
+                        <img src="parts/rotaryencoder.jpg" />
+                        <p>
+                            <strong>Features</strong>:</p>
+                        <ul>
+                            <li>Brand new and high quality</li>
+                            <li>These are continuous rotary encoder switch</li>
+                            <li>With Built in push button switch (push to operate)</li>
+                            <li>Can input the data when used with in-car CD player</li>
+                            <li>Can control the volume, on/off and data selection through LED or LCD display</li>
+                            <li>Great for use with PIC or ATMEL microcontrollers</li>
+                            <li>I am sure it the right thing you need now.Don&#39;t hesitate, bid now and never miss it.</li>
+                        </ul>
+                        <p>
+                            <strong>Specifications</strong>:</p>
+                        <ul>
+                            <li>Rotary Shaft Length: Approx. 12mm</li>
+                            <li>Shaft Full Length: Approx. 20mm</li>
+                            <li>Shaft Diameter: Approx. 6mm</li>
+                            <li>Size (L x W): Approx. 15 x 12mm</li>
+                            <li>Output: 2-bit gray code</li>
+                            <li>Closed Circuit Resistance: 3 ohms maximums</li>
+                            <li>Max. Rating: 10 mA at 5 VDC</li>
+                            <li>Operating Temperature Range: 30 to 70 degrees celsius</li>
+                            <li>Storage Temperature Range: 40 to 85 degrees celsius</li>
+                        </ul>
+                        <p>
+                            <br />
+                            <strong>Package Included</strong>:</p>
+                        <ul>
+                            <li>10 x Encoder switch</li>
+                            <li>10 x Nut</li>
+                            <li>10 x Gasket</li>
+                        </ul>
 
-        <aside id="sidebar">
-          <a href="https://github.com/pettijohn/PidController/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/pettijohn/PidController/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+                    </div>
+                    <h4>Realtime Clock Module DS1307 I2C</h4>
+                    <div>
+                        <img src="parts/realtimeclock.jpg" />
+                        <img src="parts/realtimeclock2.jpg" />
+                        <p>Features:</p>
+                        <ul>
+                            <li>Brand new and high quality.</li>
+                            <li>The module comes fully assembled.</li>
+                            <li>The DS1307 is accessed via the I2C protocol.</li>
+                            <li>Two wire I2C interface.</li>
+                            <li>Hour : minutes : seconds AM/PM.</li>
+                            <li>Day month, date - year.</li>
+                            <li>Accurate calendar up to year 2100.</li>
+                            <li>1Hz output pin.</li>
+                            <li>56 Bytes of non-volatile memory available to user.</li>
+                            <li>Size: 2.8cm x 2.7cm.</li>
+                        </ul>
+                        <p>Package Included:</p>
+                        <ul>
+                            <li>1 x DS1307 Module</li>
+                        </ul>
 
-          <p class="repo-owner"><a href="https://github.com/pettijohn/PidController"></a> is maintained by <a href="https://github.com/pettijohn">pettijohn</a>.</p>
+                    </div>
+                    <h4>Prototyping Shield and Breadboard</h4>
+                    <div>
+                        <img src="parts/protoshield.jpg" />
+                        <img src="parts/protoshield2.jpg" />
+                        <img src="parts/protoshield3.jpg" />
+                        <p>Features:</p>
+                        <ul>
+                            <li>Brand new and high quality.</li>
+                            <li>Small soldering area.</li>
+                            <li>All Arduino pins are brought to the top level.</li>
+                            <li>1 reset button, 1 general use button, and 2 LED circuits can be used directly.</li>
+                            <li>5V, GND, and Raw pins are exposed as well.</li>
+                            <li>SOIC place for IC.</li>
+                            <li>The mini breadboard has 170 tie points.</li>
+                            <li>The breadboard sticks on the prototype shield with its self-adhesive backing.</li>
+                            <li>Size:7.5cm x 5.5cm - 2.95inch x 2.16inch.</li>
+                        </ul>
+                        <p>Package Included:</p>
+                        <ul>
+                            <li>1 x Arduino prototype shield</li>
+                            <li>1 x Mini breadboard</li>
+                        </ul>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+                    </div>
+                    <h4>Ultrasonic Distance Sensor</h4>
+                    <div>
+                        <img src="parts/ultrasonic.jpg" />
+                        <img src="parts/ultrasonic2.jpg" />
+                        <div>
+                            <ul>
+                                <li>100% Brand New and High Quality </li>
+                                <li>Working Voltage : 5V(DC)</li>
+                                <li>Static current: Less than 2mA.</li>
+                                <li>Output signal: Electric frequency signal, high level 5V, low level 0V.</li>
+                                <li>Sensor angle: Not more than 15 degrees.</li>
+                                <li>Detection distance: 2cm-450cm.</li>
+                                <li>High precision: Up to 0.3cm</li>
+                                <li>Input trigger signal: 10us TTL impulse</li>
+                                <li>Echo signal : output TTL PWL signal</li>
+                                <li>Mode of connection: 
+                                    <ul>
+                                        <li>1.VCC </li>
+                                        <li>2.trig(T) </li>
+                                        <li>3.echo(R) </li>
+                                        <li>4.GND</li>
+                                    </ul>
+                                </li>
+                                <li>Use method: Supply module with 5V, the output will be 5V while obstacle in range, or 0V if not.The out pin of this module is used as a switching output when anti-theft module, and without the feet when ranging modules.</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <h4>Netduino 2</h4>
+                    
+                    <div><img src="parts/netduino2.gif" />
+                        <p><a href="http://netduino.com/netduino2/specs.htm">See the official product page</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <h3>Scratchpad</h3>
+                <ul>
+                    <li>If the surface of the water is difficult to detect with the ultrasonic distance sensor, try floating a 
+                        ping pong ball on the surface. Its location may need to be constrained with a PVC tube or similar. This may make 
+                        the housing of the distance sensor more robust than e.g. a clip on the side of the water tank.
+                    </li>
+                </ul>
+
+            </section>
+
+            <aside id="sidebar">
+                <a href="https://github.com/pettijohn/PidController/zipball/master" class="button">
+                    <small>Download</small>
+                    .zip file
+                </a>
+                <a href="https://github.com/pettijohn/PidController/tarball/master" class="button">
+                    <small>Download</small>
+                    .tar.gz file
+                </a>
+
+                <p class="repo-owner"><a href="https://github.com/pettijohn/PidController"></a>is maintained by <a href="https://github.com/pettijohn">pettijohn</a>.</p>
+
+                <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+            </aside>
+        </div>
     </div>
 
-  
-  </body>
+
+</body>
 </html>
