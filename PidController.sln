@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PidController", "PidController\PidController.csproj", "{5EA442FB-9F9F-4668-9E56-AE18E05AD01C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PidController.Tests", "PidController.Tests\PidController.Tests.csproj", "{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{5EA442FB-9F9F-4668-9E56-AE18E05AD01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EA442FB-9F9F-4668-9E56-AE18E05AD01C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5EA442FB-9F9F-4668-9E56-AE18E05AD01C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADF15E4-12FB-47C2-8803-9ACA628EDB4C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
