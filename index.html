@@ -39,8 +39,11 @@
         <div class="inner clearfix">
             <section id="main-content">
                 <h3>Project Status</h3>
-                <p>2013/09/11: Parts have been ordered. </p>
-
+                <ul>
+                    <li>2013/09/11: Parts have been ordered.</li>
+                    <li>2013/09/27: Parts are tricking in. Real Time Clock demo working.</li>
+                </ul>
+                
                 <h3>Overview</h3>
                 <p>
                     The Rancilio Silvia is a well-known and serviceable espresso machine. Hobbyists and hackers have been upgrading its temperature
@@ -346,7 +349,19 @@
                     </div>
                 </div>
 
-
+                <h3>Real Time Clock</h3>
+                <p>The real time clock module is based on a DS1307 microcontroller (<a href="parts/DS1307.pdf">datasheet</a> [pdf]). It's connected to +5V/VCC,
+                    GND, and  the Netduino 2's dedicated I2C SCL and SDA ports.<br />
+                    <img src="demos/realtimeclock.jpg" />
+                </p>
+                <p>To prove that the clock works, a demo was worked up that blinks the light to show the time. See <a href="https://github.com/pettijohn/PidController/commit/ddd1868a1c5e2909e16434637690e9d988365bd8">this commit</a>.
+                    Code to read the device is via <a href="http://forums.netduino.com/index.php?/topic/215-ds1307-real-time-clock/">this forum post</a>. The clock I received had never had a time set, so initially it
+                    was returnning an invalid number. After setting the clock once with clock.SetClock() the device is now working great.
+                </p>
+                <p>
+                    <script src="https://gist.github.com/pettijohn/6721008.js"></script>
+                </p>
+                <iframe width="420" height="315" src="https://www.youtube.com/embed/Uiuzba9_8JM" frameborder="0" allowfullscreen></iframe>
                 <h3>Scratchpad</h3>
                 <ul>
                     <li>If the surface of the water is difficult to detect with the ultrasonic distance sensor, try floating a 
