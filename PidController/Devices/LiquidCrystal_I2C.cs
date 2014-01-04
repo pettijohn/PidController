@@ -68,7 +68,7 @@ namespace PidController.Devices
 
         #region "Constructors and Initializers"
 
-        protected LiquidCrystal_I2C(byte lcd_Addr, byte lcd_cols, byte lcd_rows)
+        public LiquidCrystal_I2C(byte lcd_Addr, byte lcd_cols, byte lcd_rows)
         {
             LCDLock = new object();
 
@@ -346,6 +346,114 @@ namespace PidController.Devices
 
         #endregion
 
+        #region String commands
+
+        /// <summary>
+        /// Writes a string array to the device.  Truncates strings to the number of columns allowed, 
+        ///  or wraps if enough room.
+        /// </summary>
+        /// <param name="data">string array with each element mapped to a line on the LCD.  Will 
+        ///   truncate if too many are sent</param>
+        /// <param name="format">C = center each line</param>
+        private void write(string[] data, char format = ' ')
+        {
+            int NumRows = data.Length;
+            if (NumRows > _rows) NumRows = _rows;
+            //base.clear();
+
+            //truncate the strings, and center if needed
+            lock (LCDLock)
+            {
+                for (int i = 0; i < NumRows; i++)
+                {
+                    if (data[i].Length > _cols) data[i] = data[i].Substring(0, _cols);
+                    if (data[i].Length != 0) write(data[i], 0, (byte)i, format);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Takes in a string, and breaks it up into four strings suitable for the display
+        /// </summary>
+        /// <param name="value">String to be converted</param>
+        /// <returns>string array containing one element for each row on the display</returns>
+        public string[] MakeTextBlock(string value)
+        {
+            int LastSpace = 0;
+            string[] TextBlock = new string[_rows];
+            for (int i = 0; i < _rows; i++) TextBlock[i] = "";
+
+            for (int pass = 0; pass < _rows; pass++)
+            {
+                int SegLen = _cols;
+                if (value.Length < LastSpace + _cols) SegLen = value.Length - LastSpace;
+
+                int ThisSpace = 0;
+                string part = value.Substring(LastSpace, SegLen);
+
+                ThisSpace = part.Length;
+                if (part.Length >= _cols)
+                {
+                    for (int i = 0; i < part.Length; i++) if (part[i] == ' ') ThisSpace = i;
+                }
+
+                TextBlock[pass] = part.Substring(0, ThisSpace);
+                LastSpace += ThisSpace + 1;
+
+                if (LastSpace >= value.Length) break;
+            }
+
+            return TextBlock;
+        }
+
+        /// <summary>
+        /// Write the string at a specific location, with a specific formatting
+        /// </summary>
+        /// <param name="value">Value to display</param>
+        /// <param name="col">Starting column </param>
+        /// <param name="row">Row to display</param>
+        /// <param name="format">C = Centered on the row</param>
+        private void write(string value, byte col, byte row, char format = 'c')
+        {
+            string NewString = "";
+
+            if ((format == 'c' || format == 'C') && value.Length < _cols && col == 0)
+            {
+                for (int space = 0; space < (_cols - value.Length) / 2; space++) NewString += " ";
+                NewString = NewString + value;
+            }
+            else NewString = value;
+
+            lock (LCDLock)
+            {
+                setCursor(col, row);
+                write(NewString);
+                //if (row == TEMPROW && NewString.Trim().Length != 0) LastTempLine = DateTime.Now;
+            }
+        }
+
+        /// <summary>
+        /// Send string to the current cursor position
+        /// If the string is longer than number of columns, the string will be broken
+        ///   up into parts and written across multiple lines.
+        /// </summary>
+        /// <param name="value">string value to display</param>
+        public void write(string value)
+        {
+            if (value.Length > _cols)
+            {
+                write(MakeTextBlock(value), 'c');
+            }
+            else
+            {
+                byte[] Buffer = Tools.Chars2Bytes(value.ToCharArray());
+                lock (LCDLock)
+                    write(Buffer);
+            }
+        }
+
+        #endregion
+
         #region "Charaters and writing"
 
         /// <summary>
@@ -355,6 +463,8 @@ namespace PidController.Devices
         /// <param name="charmap"> byte[8] containg charater map</param>
         protected void createChar(byte location, byte[] charmap)
         {
+            //E.g., http://cdn.instructables.com/FLN/05VC/G68HDRBT/FLN05VCG68HDRBT.MEDIUM.jpg
+            //http://www.instructables.com/id/LED-Scolling-Dot-Matrix-Font-Graphics-Generator-/
             lock (LCDLock)
             {
                 location &= 0x7; // we only have 8 locations 0-7
@@ -386,7 +496,7 @@ namespace PidController.Devices
 
 
 
-        protected void write(byte[] value)
+        public void write(byte[] value)
         {
             lock (LCDLock)
             {
@@ -394,7 +504,7 @@ namespace PidController.Devices
                     write(value[position]);
             }
         }
-        private void write(byte value)
+        public void write(byte value)
         {
             lock (LCDLock)
                 send(value, 0x01);
@@ -465,6 +575,8 @@ namespace PidController.Devices
         private void expanderWrite(byte _data)
         {
             int length = _I2C.Write(new byte[] { (byte)(_data | _backlightval) });
+            //if (length == 0)
+            //    throw new System.IO.IOException("No data written to I2C device");
         }
         private void pulseEnable(byte _data)
         {

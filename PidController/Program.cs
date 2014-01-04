@@ -6,7 +6,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.Netduino;
-using Devices;
+using PidController.Devices;
 
 namespace PidController
 {
@@ -14,21 +14,27 @@ namespace PidController
     {
         public static void Main()
         {
-            /*var diFramework = new DIFramework();
-            diFramework.Register<ISensorState>().To<SensorState>().AsSingleton();
-            diFramework.Register<IThermocouple>().To<Thermocouple>().AsSingleton();
+            //Address should be either 0x20 or 0x27, depending on if pins 6,7,9 (A2,A1,A0) are high or low.
+            byte address = 0x27;
+            Devices.LiquidCrystal_I2C display;
 
-            var scheduler = new TaskSchedulerEngine();
-            scheduler.ResolveReference = (t) =>
-            {
-                return diFramework.Resolve(t);
-            };
+            //Both seem to work
+            //display = new Devices.LiquidCrystal_I2C(address, 20, 4);
+            display = new Devices.LiquidCrystal_I2C(address, 40, 2);
+            Debug.Print("Success 0x" + address.ToString("X"));
+            display.setBacklight(true);
+            display.write(0x1D);
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
+            display.write("Hello world");
 
-            scheduler.Add(new Schedule("everySecond").EverySecond().Execute<IThermocouple>);
-
-            scheduler.Start();
-            scheduler.Wait();*/
-
+            /* I2C Real Time Clock
             using (var clock = new DS1307RealTimeClock())
             {
                 // TODO: Do this only once to set your clock
@@ -52,7 +58,7 @@ namespace PidController
                 {
                     RederTime(led);
                 }
-            }
+            }*/
 
 
         }
