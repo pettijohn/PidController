@@ -2,7 +2,7 @@
 using System;
 using Microsoft.SPOT.Hardware;
 
-namespace Devices
+namespace PidController.Devices
 {
     /// <summary>
     /// This class interfaces with the DS1307 real time clock chip via the I2C bus.
