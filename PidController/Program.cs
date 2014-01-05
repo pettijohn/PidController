@@ -7,13 +7,22 @@ using Microsoft.SPOT.Hardware;
 using SecretLabs.NETMF.Hardware;
 using SecretLabs.NETMF.Hardware.Netduino;
 using PidController.Devices;
+using Toolbox.NETMF.Hardware;
 
 namespace PidController
 {
     public class Program
     {
+
+        static string MotionFlag;
         public static void Main()
         {
+            // Initializes a new rotary encoder object
+            RotaryEncoder Knob = new RotaryEncoder(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1);
+            // Bounds the event to the rotary encoder
+            Knob.Rotated += new NativeEventHandler(Knob_Rotated);
+
+         
             var clock = new Toolbox.NETMF.Hardware.DS1307(0x68, 100);
             //clock.SetTime(2014, 01, 05, 11, 13, 0);
             clock.Synchronize();
@@ -27,9 +36,11 @@ namespace PidController
             while (true)
             {
                 display.setCursor(0,0);
-                display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + MotionFlag);
                 Thread.Sleep(1000);
             }
+          
+          
 
 
             //This renders as an arrow ->
@@ -63,6 +74,18 @@ namespace PidController
             }*/
 
 
+        }
+
+        /// <summary>
+        /// The value has been changed
+        /// </summary>
+        /// <param name="Unused">Not used</param>
+        /// <param name="Value">The new value</param>
+        /// <param name="Time">Time of the event</param>
+        static void Knob_Rotated(uint Unused, uint Value, DateTime Time)
+        {
+            Debug.Print(Value == 1 ? "Clockwise" : "Counter clockwise");
+            MotionFlag = Value == 1 ? "+" : "-";
         }
 
         /// <summary>
