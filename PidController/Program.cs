@@ -14,7 +14,8 @@ namespace PidController
     public class Program
     {
 
-        static string MotionFlag;
+        static int RotaryValue = 0;
+
         public static void Main()
         {
             // Initializes a new rotary encoder object
@@ -36,8 +37,8 @@ namespace PidController
             while (true)
             {
                 display.setCursor(0,0);
-                display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + MotionFlag);
-                Thread.Sleep(1000);
+                display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + RotaryValue);
+                Thread.Sleep(100);
             }
           
           
@@ -84,8 +85,9 @@ namespace PidController
         /// <param name="Time">Time of the event</param>
         static void Knob_Rotated(uint Unused, uint Value, DateTime Time)
         {
+            Debug.Print(DateTime.Now.Ticks.ToString());
             Debug.Print(Value == 1 ? "Clockwise" : "Counter clockwise");
-            MotionFlag = Value == 1 ? "+" : "-";
+            RotaryValue += Value == 1 ? 1 : -1;
         }
 
         /// <summary>
