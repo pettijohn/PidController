@@ -14,37 +14,39 @@ namespace PidController
     {
         public static void Main()
         {
-            //Address should be either 0x20 or 0x27, depending on if pins 6,7,9 (A2,A1,A0) are high or low.
-            byte address = 0x27;
-            Devices.LiquidCrystal_I2C display;
+            var clock = new Toolbox.NETMF.Hardware.DS1307(0x68, 100);
+            //clock.SetTime(2014, 01, 05, 11, 13, 0);
+            clock.Synchronize();
+            Debug.Print("System has started at: " + DateTime.Now.ToString());
 
-            //Both seem to work
-            //display = new Devices.LiquidCrystal_I2C(address, 20, 4);
-            display = new Devices.LiquidCrystal_I2C(address, 40, 2);
-            Debug.Print("Success 0x" + address.ToString("X"));
+
+            //Both 40x2 and 20x4 seem to work
+            var display = new Devices.LiquidCrystal_I2C(0x27, 40, 2);
             display.setBacklight(true);
-            display.write(0x1D);
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
-            display.write("Hello world");
 
-            /* I2C Real Time Clock
-            using (var clock = new DS1307RealTimeClock())
+            while (true)
             {
-                // TODO: Do this only once to set your clock
-                //clock.SetClock(13, 09, 26, 19, 23, 0, DayOfWeek.Tuesday);
-
-                clock.SetLocalTimeFromRTC();
-
-                Debug.Print("System has started at: " + DateTime.Now.ToString());
+                display.setCursor(0,0);
+                display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                Thread.Sleep(1000);
             }
 
+
+            //This renders as an arrow ->
+            //display.write((byte)0x7E);
+            //display.write("~");
+
+            //This renders as ° Degree
+            //display.write("ß");
+            //display.write((byte)0xDF);
+
+            //Square Cursor
+            //display.write((byte)0xFF);
+            //display.write("ÿ");
+            
+
+
+            /* I2C Real Time Clock
             InputPort button = new InputPort(Pins.ONBOARD_SW1, false, Port.ResistorMode.Disabled);
             bool buttonState = false;
 

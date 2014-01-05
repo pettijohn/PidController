@@ -481,7 +481,7 @@ namespace PidController.Devices
         /// </summary>
         /// <param name="col"> 0 - MaxCols - 1</param>
         /// <param name="row"> 0 - MaxRows - 1</param>
-        protected void setCursor(byte col, byte row)
+        public void setCursor(byte col, byte row)
         {
             lock (LCDLock)
             {

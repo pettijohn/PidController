@@ -36,7 +36,6 @@
     <Compile Include="Devices\LiquidCrystal_I2C.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Devices\DS1307RealTimeClock.cs" />
     <Compile Include="Devices\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,5 +49,6 @@
     <Reference Include="System" />
     <Reference Include="Toolbox.NETMF.Core, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Toolbox.NETMF.Hardware.Core, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Toolbox.NETMF.Hardware.DS1307, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
 </Project>
