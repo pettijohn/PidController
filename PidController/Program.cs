@@ -18,6 +18,16 @@ namespace PidController
 
         public static void Main()
         {
+            var distance = new UltrasonicDistance(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1);
+            distance.DistanceChanged += distance_DistanceChanged;
+
+            while (true)
+            {
+                distance.ReadDistance();
+                Thread.Sleep(1000);
+            }
+
+            /*
             // Initializes a new rotary encoder object
             RotaryEncoder Knob = new RotaryEncoder(Pins.GPIO_PIN_D0, Pins.GPIO_PIN_D1);
             // Bounds the event to the rotary encoder
@@ -40,7 +50,7 @@ namespace PidController
                 display.write(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + RotaryValue);
                 Thread.Sleep(100);
             }
-          
+            */
           
 
 
@@ -75,6 +85,11 @@ namespace PidController
             }*/
 
 
+        }
+
+        static void distance_DistanceChanged(DistanceChangedEventArgs args)
+        {
+            Debug.Print("Distance (cm): " + args.DistanceCM.ToString("F1"));
         }
 
         /// <summary>
